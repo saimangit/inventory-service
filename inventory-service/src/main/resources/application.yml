@@ -1,0 +1,10 @@
+feign:
+  client:
+    config:
+      stores:
+        request-interceptors:
+          - com.example.configuration.FeignConfiguration
+          
+          
+        
+       
