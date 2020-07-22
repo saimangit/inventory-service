@@ -21,7 +21,7 @@ import feign.hystrix.FallbackFactory;
 
 //url = "http://localhost:8010"
 //url = "http://stockservicerds-env.eba-dwrqj2wp.us-east-1.elasticbeanstalk.com/"
-@FeignClient(value = "stock-service",url = "http://stockservicerds-env.eba-dwrqj2wp.us-east-1.elasticbeanstalk.com/"
+@FeignClient(value = "stock-service",url = "http://localhost:8010"
 ,configuration = FeignConfiguration.class,
 fallback =  StockClientFallBack.class )
 public interface StockClient {
