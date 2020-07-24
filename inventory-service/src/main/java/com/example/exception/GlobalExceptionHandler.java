@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import com.example.model.ErrorDetails;
+import com.example.entity.ErrorDetails;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(ProductNotFoundException.class)
-	public ResponseEntity<?> ProductNotFoundException(ProductNotFoundException ex, WebRequest request){
+	public ResponseEntity<ErrorDetails> productNotFoundException(ProductNotFoundException ex, WebRequest request){
 		ErrorDetails error= 
 				new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false));
 		
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 	}
    
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<?> gobalExceptionHandler(Exception ex, WebRequest request){
+	public ResponseEntity<ErrorDetails> gobalExceptionHandler(Exception ex, WebRequest request){
 		ErrorDetails error= 
 				new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false));
 		

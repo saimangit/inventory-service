@@ -1,10 +1,10 @@
 package com.example.config;
 
-import javax.annotation.RegEx;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.type.filter.RegexPatternTypeFilter;
+
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
