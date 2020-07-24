@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.StockProductClient;
+import com.example.dto.StockProductsDTO;
 import com.example.entity.Stock;
 import com.example.entity.StockProducts;
 import com.example.exception.ProductNotFoundException;
@@ -34,25 +35,42 @@ public class StockProductService {
 		return productRepository.findBySid(sid);
 	}
 
-	public StockProducts addStock(String sid, StockProducts product) throws StockNotFoundException {
+	public StockProducts addStock(String sid, StockProductsDTO product) throws StockNotFoundException {
+		
+		StockProducts sp = objectMapping(product);
+	
+		
 		return stockRepository.findById((long) Integer.parseInt(sid)).map(stock -> {
-			product.setStock(stock);
-			return productRepository.save(product);
-		}).orElseThrow(() -> new StockNotFoundException("stock is not avvailable for the sid " + sid));
+			sp.setStock(stock);
+			return productRepository.save(sp);
+		}).orElseThrow(() -> new StockNotFoundException("stock is not available for the sid " + sid));
 	}
 
-	public StockProducts updateStock(String sid, String pid, StockProducts product) {
-		if (!productRepository.existsById((long) Integer.parseInt(sid))) {
-			throw new ProductNotFoundException(EXCEPTION_MESSAGE + pid);
+	private StockProducts objectMapping(StockProductsDTO product) {
+		StockProducts sp= new StockProducts();
+		sp.setCreatedDate(product.getCreatedDate());
+		sp.setCreatedUser(product.getCreatedUser());
+		sp.setDiscount(product.getDiscount());
+		sp.setListPrice(product.getListPrice());
+		sp.setProductName(product.getProductName());
+		return sp;
+	}
+
+	public StockProducts updateStock(String sid, String pid, StockProductsDTO product) throws StockNotFoundException  {
+		if (!stockRepository.existsById((long) Integer.parseInt(sid))) {
+			throw new StockNotFoundException(EXCEPTION_MESSAGE + pid);
 		}
 
+		StockProducts sp = objectMapping(product);
+		
+		
 		return productRepository.findById((long) Integer.parseInt(pid)).map(p -> {
-			p.setCreatedDate(product.getCreatedDate());
-			p.setCreatedUser(product.getCreatedUser());
-			p.setDiscount(product.getDiscount());
-			p.setListPrice(product.getListPrice());
-			p.setCreatedDate(product.getCreatedDate());
-			p.setProductName(product.getProductName());
+			
+			p.setCreatedUser(sp.getCreatedUser());
+			p.setDiscount(sp.getDiscount());
+			p.setListPrice(sp.getListPrice());
+			p.setCreatedDate(sp.getCreatedDate());
+			p.setProductName(sp.getProductName());
 
 			return productRepository.save(p);
 		}).orElseThrow(() -> new ProductNotFoundException(EXCEPTION_MESSAGE + pid));
@@ -94,7 +112,7 @@ public class StockProductService {
 		}
 	}
 
-	public List<com.example.dto.Stock> getAllStock() {
+	public List<Stock> getAllStock() {
 		return stockProductClient.getNewAllStock();
 	}
 }

@@ -1,38 +1,45 @@
 package com.example.dto;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 
-public class Stock {
 
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+public class StockDTO{
 
 
 	  private Long supplierId;
-	
+	  @NotBlank(message="supplier name is mandatory")
 	  private String supplierName;
-
+	  @NotBlank(message="supplier contact is mandatory")
 	  private String supplierContact;
-	  
 	  private int qty;
-	 
+	  @NotBlank(message="valid must not be null")
 	  private String valid;
-
-      private List<StockProducts> stockProducts = new ArrayList<>();
+      @JsonIgnore
+      //@OrderColumn(name="pid")
+      private List<StockProductsDTO> stockProducts = new ArrayList<>();
 	    
 	
 	
 	
       
       
-	public Stock() {
+	public StockDTO() {
 		super();
 	}
-	public List<StockProducts> getStockProducts() {
+	public List<StockProductsDTO> getStockProducts() {
 		return stockProducts;
 	}
-	public void setStockProducts(List<StockProducts> stockProducts) {
+	public void setStockProducts(List<StockProductsDTO> stockProducts) {
 		this.stockProducts = stockProducts;
-		for(StockProducts s:stockProducts) {
+		for(StockProductsDTO s:stockProducts) {
 			s.setStock(this);
 		}
 	}

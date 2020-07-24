@@ -9,7 +9,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.configuration.FeignConfiguration;
-import com.example.dto.Stock;
+import com.example.entity.Stock;
+
 
 
 
@@ -17,7 +18,7 @@ import com.example.dto.Stock;
 fallback =  StockProductClientFallBack.class)
 public interface StockProductClient {
 
-	 @GetMapping(value = "/stock",produces = "application/json")
+	 @GetMapping(value = "/stock-product-api/stock",produces = "application/json")
 	  public List<Stock> getNewAllStock(); 
 		
 }

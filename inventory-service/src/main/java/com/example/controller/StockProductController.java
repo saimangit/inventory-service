@@ -1,13 +1,13 @@
 package com.example.controller;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.StockProductClient;
+
+import com.example.dto.StockProductsDTO;
 import com.example.entity.Stock;
 import com.example.entity.StockProducts;
-import com.example.exception.ProductNotFoundException;
+
 import com.example.exception.StockNotFoundException;
-import com.example.repo.ProductRepository;
-import com.example.repo.StockRepository;
+
+
 import com.example.service.StockProductService;
 
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +48,7 @@ public class StockProductController {
 	@Transactional
 	@ApiOperation(value = "adding product")
 	@PostMapping(path = "/stock/{sid}/product/", produces = "application/json")
-	public StockProducts addNewProduct(@PathVariable("sid") String sid, @Valid @RequestBody StockProducts product)
+	public StockProducts addNewProduct(@PathVariable("sid") String sid, @Valid @RequestBody StockProductsDTO product)
 			throws StockNotFoundException {
 
 		return stockProductService.addStock(sid, product);
@@ -56,7 +57,7 @@ public class StockProductController {
 	@ApiOperation(value = "updating the product")
 	@PutMapping(path = "/stock/{sid}/product/{pid}/", produces = "application/json")
 	public StockProducts getNewProduct(@PathVariable("sid") String sid, @PathVariable("pid") String pid,
-			@Valid @RequestBody StockProducts product) {
+			@Valid @RequestBody StockProductsDTO product) throws StockNotFoundException {
 
 		return stockProductService.updateStock(sid, pid, product);
 
@@ -78,7 +79,7 @@ public class StockProductController {
 	}
 
 	@GetMapping(value = "/stock-admin", produces = "application/json")
-	public List<com.example.dto.Stock> getStockDetails() {
+	public List<Stock> getStockDetails() {
 
 		return stockProductService.getAllStock();
 
