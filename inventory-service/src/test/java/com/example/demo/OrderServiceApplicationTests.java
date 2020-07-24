@@ -107,7 +107,7 @@ class OrderServiceApplicationTests extends AbstractTest {
 //	
 	@Test
     void deleteStock() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/103/product/19/";
+		String uri="http://localhost:8000/product-api/stock/300/product/20/";
 		
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		
