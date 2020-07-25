@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -44,7 +44,16 @@ public class StockProductController {
 
 		return stockProductService.displayProduct(sid);
 	}
+    
+	
+	@ApiOperation(value = "view a particular product")
+	@GetMapping(path = "/stock/{sid}/product/{pid}", produces = "application/json")
+	public Optional<StockProducts> getProduct(@PathVariable("sid") String sid,
+			@PathVariable("pid") String pid) {
 
+		return stockProductService.getProduct(sid,pid);
+	}	
+	
 	@Transactional
 	@ApiOperation(value = "adding product")
 	@PostMapping(path = "/stock/{sid}/product/", produces = "application/json")

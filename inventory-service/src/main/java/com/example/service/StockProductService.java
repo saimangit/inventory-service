@@ -32,7 +32,7 @@ public class StockProductService {
 	StockProductClient stockProductClient;
 
 	public Iterable<StockProducts> displayProduct(String sid) {
-		return productRepository.findBySid(sid);
+		return productRepository.findBySid( Integer.parseInt(sid));
 	}
 
 	public StockProducts addStock(String sid, StockProductsDTO product) throws StockNotFoundException {
@@ -114,5 +114,12 @@ public class StockProductService {
 
 	public List<Stock> getAllStock() {
 		return stockProductClient.getNewAllStock();
+	}
+
+	public Optional<StockProducts> getProduct(String sid, String pid) {
+		
+		int s=Integer.parseInt(sid);
+		Long p=(long) Integer.parseInt(pid);		
+		return productRepository.findOneProduct(s,p);
 	}
 }
