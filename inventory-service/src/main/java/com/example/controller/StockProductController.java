@@ -65,7 +65,7 @@ public class StockProductController {
 
 	@ApiOperation(value = "view a particular product by suppling pid")
 	@DeleteMapping(value = "/stock/{sid}/product/{pid}/", produces = "application/json")
-	public ResponseEntity<?> deleteNewProduct(@PathVariable("sid") String sid, @PathVariable("pid") String pid) {
+	public ResponseEntity<Object> deleteNewProduct(@PathVariable("sid") String sid, @PathVariable("pid") String pid) {
 
 		return stockProductService.deleteStock(pid);
 

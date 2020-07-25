@@ -38,7 +38,7 @@ class OrderServiceApplicationTests extends AbstractTest {
 	
 	@Test
      void getProductList() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/103/product/";
+		String uri="http://localhost:8000/product-api/stock/500/product/";
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.get(uri).
 				accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		
@@ -53,67 +53,64 @@ class OrderServiceApplicationTests extends AbstractTest {
 	@Transactional
 	@Test
     void createProduct() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/103/product/";
-		StockProducts s= new StockProducts();
-	    s.setCreatedDate("24/07/2020");
-	    s.setCreatedUser("saiman");
-	    s.setDiscount(200);
-	    s.setListPrice(1000);
-	    s.setProductName("Bags");
-		
-	    
-	   // Optional<Stock> stock=stockRepository.findById((long) 103);
-	    
-	    //s.setStock(stock.get());
+		String uri="http://localhost:8000/product-api/stock/920/product/";
 	
-		
-		String inputJson=super.mapToJson(s);
-		
+		StockProducts stockProdcuts= new StockProducts();
 		
 		
+		stockProdcuts.setCreatedDate("25/07/2020");
+		stockProdcuts.setCreatedUser("saiman");
+		stockProdcuts.setDiscount(200);
+		stockProdcuts.setListPrice(1000);
+		stockProdcuts.setProductName("Books");
+		
+					    
+	    String inputJson=super.mapToJson(stockProdcuts);
+	   
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.post(uri).
 				contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
 		
 		int status=mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
-//		String json=mvcResult.getResponse().getContentAsString();
-//		assertEquals(inputJson, json);
+        String json=mvcResult.getResponse().getContentAsString();
+   
 		
 	}
 	
-//	@Test
-//    public void updateStock() throws Exception{
-//		String uri="http://localhost:8000/product-api/stock/103/product/2";
-//		StockProducts s= new StockProducts();
-//	    s.setCreatedDate("24/07/2020");
-//	    s.setCreatedUser("saiman");
-//	    s.setDiscount(200);
-//	    s.setListPrice(1000);
-//	    s.setProductName("Bags");
-//		
-//		String inputJson=super.mapToJson(s);
-//		
-//		
-//		
-//		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.put(uri).
-//				contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-//		
-//		int status=mvcResult.getResponse().getStatus();
-//		assertEquals(200, status);
-//		String json=mvcResult.getResponse().getContentAsString();
-//	    assertEquals(inputJson, json);
-//		
-//	}
-//	
+	
+	
+	@Test
+    void updateStock() throws Exception{
+		String uri="http://localhost:8000/product-api/stock/910/product/50/";
+		StockProducts s= new StockProducts();
+	    s.setPid((long)50);
+		s.setCreatedDate("24/07/2020");
+	    s.setCreatedUser("saiman");
+	    s.setDiscount(200);
+	    s.setListPrice(1000);
+	    s.setProductName("ipods");
+		
+		String inputJson=super.mapToJson(s);
+		
+		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.put(uri).
+				contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
+		
+		int status=mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String json=mvcResult.getResponse().getContentAsString();
+	    assertEquals(inputJson, json);
+		
+	}
+	
 	@Test
     void deleteStock() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/103/product/19/";
+		String uri="http://localhost:8000/product-api/stock/500/product/35/";
 		
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		
 		int status=mvcResult.getResponse().getStatus();
 		System.out.println("status is :"+ status);
-		//assertEquals(200, status);
+		assertEquals(200, status);
 	
 	}
 	

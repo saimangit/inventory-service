@@ -76,7 +76,7 @@ public class StockProductService {
 		}).orElseThrow(() -> new ProductNotFoundException(EXCEPTION_MESSAGE + pid));
 	}
 
-	public ResponseEntity<?> deleteStock(String pid) {
+	public ResponseEntity<Object> deleteStock(String pid) {
 		return productRepository.findById((long) Integer.parseInt(pid)).map(p -> {
 			productRepository.delete(p);
 			return ResponseEntity.ok().build();

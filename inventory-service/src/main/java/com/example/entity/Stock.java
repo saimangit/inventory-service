@@ -93,6 +93,9 @@ public class Stock implements Serializable{
 	public void setValid(String valid) {
 		this.valid = valid;
 	}
-	  
-	  
+	@Override
+	public String toString() {
+		return "Stock [supplierId=" + supplierId + ", supplierName=" + supplierName + ", supplierContact="
+				+ supplierContact + ", qty=" + qty + ", valid=" + valid + "]";
+	}  
 }
