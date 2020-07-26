@@ -23,7 +23,7 @@ import com.example.repo.StockRepository;
 import com.sun.jersey.core.header.MediaTypes;
 
 //@SpringBootTest
-class OrderServiceApplicationTests extends AbstractTest {
+class ProductServiceApplicationTests extends AbstractTest {
 
 	@Autowired
 	ProductRepository productRepository;
@@ -38,7 +38,7 @@ class OrderServiceApplicationTests extends AbstractTest {
 	
 	@Test
      void getProductList() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/500/product/";
+		String uri="http://localhost:8000/product-api/stock/400/product/";
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.get(uri).
 				accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		
@@ -53,16 +53,15 @@ class OrderServiceApplicationTests extends AbstractTest {
 	@Transactional
 	@Test
     void createProduct() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/920/product/";
+		String uri="http://localhost:8000/product-api/stock/400/product/";
 	
 		StockProducts stockProdcuts= new StockProducts();
 		
-		
 		stockProdcuts.setCreatedDate("25/07/2020");
-		stockProdcuts.setCreatedUser("saiman");
+		stockProdcuts.setCreatedUser("testman");
 		stockProdcuts.setDiscount(200);
 		stockProdcuts.setListPrice(1000);
-		stockProdcuts.setProductName("Books");
+		stockProdcuts.setProductName("routers");
 		
 					    
 	    String inputJson=super.mapToJson(stockProdcuts);
@@ -81,14 +80,14 @@ class OrderServiceApplicationTests extends AbstractTest {
 	
 	@Test
     void updateStock() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/910/product/50/";
+		String uri="http://localhost:8000/product-api/stock/401/product/61/";
 		StockProducts s= new StockProducts();
-	    s.setPid((long)50);
-		s.setCreatedDate("24/07/2020");
+	    s.setPid((long)61);
+		s.setCreatedDate("27/07/2020");
 	    s.setCreatedUser("saiman");
 	    s.setDiscount(200);
 	    s.setListPrice(1000);
-	    s.setProductName("ipods");
+	    s.setProductName("Ipods");
 		
 		String inputJson=super.mapToJson(s);
 		
@@ -104,7 +103,7 @@ class OrderServiceApplicationTests extends AbstractTest {
 	
 	@Test
     void deleteStock() throws Exception{
-		String uri="http://localhost:8000/product-api/stock/500/product/35/";
+		String uri="http://localhost:8000/product-api/stock/400/product/59/";
 		
 		MvcResult mvcResult= mock.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		

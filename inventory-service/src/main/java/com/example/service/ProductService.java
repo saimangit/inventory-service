@@ -18,7 +18,7 @@ import com.example.repo.ProductRepository;
 import com.example.repo.StockRepository;
 
 @Service
-public class StockProductService {
+public class ProductService {
 
 	private static final String EXCEPTION_MESSAGE = "product not found for the pid : ";
 

@@ -27,16 +27,16 @@ import com.example.entity.StockProducts;
 import com.example.exception.StockNotFoundException;
 
 
-import com.example.service.StockProductService;
+import com.example.service.ProductService;
 
 import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/product-api")
-public class StockProductController {
+public class ProductController {
 
 	@Autowired
-	StockProductService stockProductService;
+	ProductService stockProductService;
 
 	@ApiOperation(value = "view all products available")
 	@GetMapping(path = "/stock/{sid}/product/", produces = "application/json")
